@@ -2,12 +2,19 @@ package models;
   
 import javax.persistence.Entity;  
 import javax.persistence.Table;  
-import play.db.jpa.Model;  
+import javax.persistence.Id;  
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+//import play.db.jpa.Model;  
+import play.db.jpa.GenericModel;
   
 @Entity
 @Table(name = "account")
-public class Account extends Model {
+public class Account extends GenericModel {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long id;
   public String email;
   public String fullname;
   public boolean isAdmin;
