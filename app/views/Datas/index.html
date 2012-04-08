@@ -1,3 +1,137 @@
 #{set title:'Datas' /}
+<!doctype html>
+<!-- DEBUG -->
+<!-- disable offline caching in debug mode -->
+<html>
+<!-- /DEBUG -->
+<!-- PRODUCTION
+<html manifest="cache.appcache">
+/PRODUCTION -->
+<head>
+<meta charset="utf-8">
+<title>mindmaps</title>
+<link rel="icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+<link rel="stylesheet" href="@{'/public/stylesheets/common.css'}" />
+<link rel="stylesheet" href="@{'/public/stylesheets/app.css'}" />
+<link rel="stylesheet" href="@{'/public/stylesheets/Aristo/jquery-ui-1.8.7.custom.css'}" />
+<link rel="stylesheet" href="@{'/public/stylesheets/minicolors/jquery.miniColors.css'}" />
 
-<h1>Hello World</h1>
+</head>
+<body>
+  <div id="print-area">
+    <p class="print-placeholder">Please use the print option from the
+      mind map menu</p>
+  </div>
+  <!-- DEBUG -->
+  <div id="debug-warning">Running in DEBUG mode.</div>
+  <!-- /DEBUG -->
+  <div id="container">
+    <div id="topbar">
+      <div id="toolbar">
+        <div id="logo" class="logo-bg">
+          <span>mindmaps</span>
+        </div>
+
+        <div class="buttons">
+          <span class="buttons-left"> </span> <span class="buttons-right">
+          </span>
+        </div>
+
+      </div>
+    </div>
+    <div id="canvas-container">
+      <div id="drawing-area"></div>
+    </div>
+    <div id="bottombar">
+      <div id="about">
+        <a href="about.html" target="_blank">About mindmaps</a> <span
+          style="padding: 0 4px;">|</span> <a style="font-weight: bold"
+          href="https://spreadsheets.google.com/a/drichard.org/spreadsheet/viewform?formkey=dEE3VzFWOFp6ZV9odEhhczVBUUdzc2c6MQ"
+          target="_blank">Feedback</a>
+      </div>
+      <div id="statusbar">
+        <div
+          class="buttons buttons-right buttons-small buttons-less-padding"></div>
+      </div>
+    </div>
+  </div>
+  <script
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+  <!-- DEBUG -->
+  <!-- set debug flag for all scripts. Will be removed in production -->
+  <script type="text/javascript">
+    var mindmaps = mindmaps || {};
+    mindmaps.DEBUG = true;
+  </script>
+  <!-- /DEBUG -->
+
+  <!-- JS:LIB:BEGIN -->
+  <script src="@{'/public/javascripts/libs/jquery-ui-1.8.11.custom.min.js'}"></script>
+  <script src="@{'/public/javascripts/libs/dragscrollable.js'}"></script>
+  <script src="@{'/public/javascripts/libs/jquery.hotkeys.js'}"></script>
+  <script src="@{'/public/javascripts/libs/jquery.mousewheel.js'}"></script>
+  <script src="@{'/public/javascripts/libs/jquery.minicolors.js'}"></script>
+  <script src="@{'/public/javascripts/libs/jquery.tmpl.js'}"></script>
+  <script src="@{'/public/javascripts/libs/swfobject.js'}"></script>
+  <script src="@{'/public/javascripts/libs/downloadify.min.js'}"></script>
+  <script src="@{'/public/javascripts/libs/events.js'}"></script>
+
+  <script src="@{'/public/javascripts/MindMaps.js'}"></script>
+  <script src="@{'/public/javascripts/Command.js'}"></script>
+  <script src="@{'/public/javascripts/CommandRegistry.js'}"></script>
+  <script src="@{'/public/javascripts/Action.js'}"></script>
+  <script src="@{'/public/javascripts/Util.js'}"></script>
+  <script src="@{'/public/javascripts/Point.js'}"></script>
+  <script src="@{'/public/javascripts/Document.js'}"></script>
+  <script src="@{'/public/javascripts/MindMap.js'}"></script>
+  <script src="@{'/public/javascripts/Node.js'}"></script>
+  <script src="@{'/public/javascripts/NodeMap.js'}"></script>
+  <script src="@{'/public/javascripts/UndoManager.js'}"></script>
+  <script src="@{'/public/javascripts/UndoController.js'}"></script>
+  <script src="@{'/public/javascripts/ClipboardController.js'}"></script>
+  <script src="@{'/public/javascripts/ZoomController.js'}"></script>
+  <script src="@{'/public/javascripts/ShortcutController.js'}"></script>
+  <script src="@{'/public/javascripts/HelpController.js'}"></script>
+  <script src="@{'/public/javascripts/FloatPanel.js'}"></script>
+  <script src="@{'/public/javascripts/Navigator.js'}"></script>
+  <script src="@{'/public/javascripts/Inspector.js'}"></script>
+  <script src="@{'/public/javascripts/ToolBar.js'}"></script>
+  <script src="@{'/public/javascripts/StatusBar.js'}"></script>
+  <script src="@{'/public/javascripts/CanvasDrawingTools.js'}"></script>
+  <script src="@{'/public/javascripts/CanvasView.js'}"></script>
+  <script src="@{'/public/javascripts/CanvasPresenter.js'}"></script>
+  <script src="@{'/public/javascripts/ApplicationController.js'}"></script>
+  <script src="@{'/public/javascripts/MindMapModel.js'}"></script>
+  <script src="@{'/public/javascripts/NewDocument.js'}"></script>
+  <script src="@{'/public/javascripts/OpenDocument.js'}"></script>
+  <script src="@{'/public/javascripts/SaveDocument.js'}"></script>
+  <script src="@{'/public/javascripts/MainViewController.js'}"></script>
+  <script src="@{'/public/javascripts/Storage.js'}"></script>
+  <script src="@{'/public/javascripts/Event.js'}"></script>
+  <script src="@{'/public/javascripts/Notification.js'}"></script>
+  <script src="@{'/public/javascripts/StaticCanvas.js'}"></script>
+  <script src="@{'/public/javascripts/PrintController.js'}"></script>
+  <script src="@{'/public/javascripts/ExportMap.js'}"></script>
+  <script src="@{'/public/javascripts/AutoSaveController.js'}"></script>
+  <!-- JS:LIB:END -->
+
+  <!-- PRODUCTION
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push([ '_setAccount', 'UA-23624804-1' ]);
+  _gaq.push([ '_trackPageview' ]);
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+        : 'http://www')
+        + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+/PRODUCTION -->
+</body>
+</html>
